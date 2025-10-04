@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { FEED_SLICE_NAME, RequestStatus } from '../constants';
+import { FEED_SLICE_NAME, RequestStatus } from '@constants';
 import { TFeedsResponse } from '@api';
 import { fetchFeeds } from '../thunk/feedThunk';
 
@@ -29,6 +29,9 @@ const FeedSlice = createSlice({
       .addCase(fetchFeeds.fulfilled, (state, action) => {
         state.ordersData = action.payload;
         state.requestStatus = RequestStatus.SUCCESS;
+      })
+      .addCase(fetchFeeds.rejected, (state) => {
+        state.requestStatus = RequestStatus.FAILED;
       });
   },
   selectors: {
@@ -38,5 +41,6 @@ const FeedSlice = createSlice({
   }
 });
 
+export const feedActions = { ...FeedSlice.actions, fetchFeeds };
 export const feedSelectors = FeedSlice.selectors;
 export default FeedSlice;

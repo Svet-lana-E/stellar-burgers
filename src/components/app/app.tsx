@@ -9,49 +9,102 @@ import {
   Register,
   ResetPassword
 } from '@pages';
+
 import '../../index.css';
 import styles from './app.module.css';
 
-import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { AppHeader } from '../../components/app-header';
+import { IngredientDetails } from '../../components/ingredient-details';
+import { Modal } from '../../components/modal';
+import { OrderInfo } from '../../components/order-info';
+import {
+  Location,
+  Route,
+  Routes,
+  useLocation,
+  useMatch,
+  useNavigate
+} from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route';
-import { useDispatch } from '../../services/store';
+import { useDispatch, useSelector } from '@store';
 import { fetchIngredients } from '../../services/thunk/ingredientsThunk';
-import { useSelector } from 'react-redux';
 import { ingredientsSelectors } from '../../services/slices/ingredients';
 import { fetchFeeds } from '../../services/thunk/feedThunk';
+import { userActions } from '../../services/slices/user';
+import { useEffect } from 'react';
 
 const App = () => {
+  //const searchQuery = useSelector
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  dispatch(fetchIngredients());
-  dispatch(fetchFeeds());
+  const { fetchUser, loginUser, registerUser, setUserCheck } = userActions;
+  const location: Location<{ background: Location }> = useLocation();
+  const background = location.state?.background;
+  const profileMatch = useMatch('/profile/orders/:number')?.params.number;
+  const feedMatch = useMatch('/feed/:number')?.params.number;
+  const orderNumber = profileMatch || feedMatch;
+
+  // const handleRequest = () => {
+  //fetchCards(searchQuery);
+  // }
   // const ingredients = useSelector(ingredientsSelectors.selectIngredients);
   // const isLoading = useSelector(ingredientsSelectors.selectIngredientsStatus);
 
-  // const handleRequest = () => {
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    //handleRequest();
+  };
+
+  const onCloseModal = () => {
+    navigate(-1);
+  };
+
+  useEffect(() => {
+    //handleRequest();
+    dispatch(fetchIngredients());
+    dispatch(fetchFeeds());
+    dispatch(fetchUser())
+      .unwrap()
+      .catch(() => {})
+      .finally(() => setUserCheck());
+  }, [dispatch]);
+
   // }
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Routes>
+      <Routes location={background || location}>
         {/* общие маршруты */}
         <Route path='/' element={<ConstructorPage />} />
+        <Route path='/ingredients/:id' element={<IngredientDetails />} />
         <Route path='/feed' element={<Feed />} />
+        <Route path='/feed/:number' element={<OrderInfo />} />
         <Route path='*' element={<NotFound404 />} />
         {/* защищенные маршруты */}
         <Route
+          path='/profile/orders/:number'
+          element={
+            <ProtectedRoute>
+              <OrderInfo />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path='/login'
           element={
-            <ProtectedRoute isProtected>
-              <Login />
+            <ProtectedRoute isPublic>
+              <Login
+              // onLogin={(dataUser) => {
+              //   loginUser(dataUser);
+              // }}
+              />
             </ProtectedRoute>
           }
         />
         <Route
           path='/register'
           element={
-            <ProtectedRoute isProtected>
+            <ProtectedRoute isPublic>
               <Register />
             </ProtectedRoute>
           }
@@ -59,7 +112,7 @@ const App = () => {
         <Route
           path='/forgot-password'
           element={
-            <ProtectedRoute isProtected>
+            <ProtectedRoute>
               <ForgotPassword />
             </ProtectedRoute>
           }
@@ -67,7 +120,7 @@ const App = () => {
         <Route
           path='/reset-password'
           element={
-            <ProtectedRoute isProtected>
+            <ProtectedRoute>
               <ResetPassword />
             </ProtectedRoute>
           }
@@ -75,7 +128,7 @@ const App = () => {
         <Route
           path='/profile'
           element={
-            <ProtectedRoute isProtected>
+            <ProtectedRoute>
               <Profile />
             </ProtectedRoute>
           }
@@ -83,56 +136,47 @@ const App = () => {
         <Route
           path='/profile/orders'
           element={
-            <ProtectedRoute isProtected>
+            <ProtectedRoute>
               <ProfileOrders />
             </ProtectedRoute>
           }
         />
-        {/* модалки */}
-        <Route
-          path='/feed/:number'
-          element={
-            <Modal
-              title={''}
-              onClose={function (): void {
-                throw new Error('Function not implemented.');
-              }}
-            >
-              <OrderInfo />
-            </Modal>
-          }
-        />
-        <Route
-          path='/ingredients/:id'
-          element={
-            <Modal
-              title={''}
-              onClose={function (): void {
-                throw new Error('Function not implemented.');
-              }}
-            >
-              <IngredientDetails />
-            </Modal>
-          }
-        />
-        {/* защищенные модалки */}
-        <Route
-          path='/profile/orders/:number'
-          element={
-            <ProtectedRoute isProtected>
-              <Modal
-                title={''}
-                onClose={function (): void {
-                  throw new Error('Function not implemented.');
-                }}
-              >
+      </Routes>
+
+      {background && (
+        <Routes>
+          {/* модалки */}
+          <Route
+            path='/feed/:number'
+            element={
+              <Modal title={`#${orderNumber}`} onClose={onCloseModal}>
                 <OrderInfo />
               </Modal>
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+            }
+          />
+          <Route
+            path='/ingredients/:id'
+            element={
+              <Modal title={'Детали ингредиента'} onClose={onCloseModal}>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+          {/* защищенные модалки */}
+          <Route
+            path='/profile/orders/:number'
+            element={
+              <ProtectedRoute>
+                <Modal onClose={onCloseModal} title={`#${orderNumber}`}>
+                  <OrderInfo />
+                </Modal>
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      )}
     </div>
   );
 };
+
 export default App;

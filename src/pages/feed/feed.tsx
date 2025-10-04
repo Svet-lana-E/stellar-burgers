@@ -1,12 +1,11 @@
 import { Preloader } from '@ui';
 import { FeedUI } from '@ui-pages';
 import { TOrder } from '@utils-types';
-import { FC, useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC, useCallback, useEffect, useMemo } from 'react';
 import { feedSelectors } from '../../services/slices/feed';
 import { fetchFeeds } from '../../services/thunk/feedThunk';
 import { getFeedsApi } from '@api';
-import { AppDispatch } from 'src/services/store';
+import { useDispatch, useSelector } from '@store';
 
 export const Feed: FC = () => {
   /** TODO: взять переменную из стора */
@@ -14,18 +13,18 @@ export const Feed: FC = () => {
 
   const dispatch = useDispatch();
 
-  // const handleGetFeeds = useCallback(
-  //   () => {
-  //     dispatch(fetchFeeds()).then((result) => ),
-  //   [dispatch]
-  // );
+  const handleGetFeeds = useCallback(() => dispatch(fetchFeeds()), [dispatch]);
 
-  // useEffect(() => {
-  //   handleGetFeeds();
-  // }, [handleGetFeeds]);
+  useEffect(() => {
+    dispatch(fetchFeeds());
+  }, [dispatch]);
+
+  useEffect(() => {
+    handleGetFeeds();
+  }, [handleGetFeeds]);
 
   if (!orders.length) {
     return <Preloader />;
   }
-  return <FeedUI orders={orders} handleGetFeeds={() => {}} />;
+  return <FeedUI orders={orders} handleGetFeeds={handleGetFeeds} />;
 };

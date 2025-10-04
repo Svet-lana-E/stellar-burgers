@@ -58,7 +58,7 @@ module.exports = {
   ],
   resolve: {
     extensions: [
-      '*',
+      '.*',
       '.js',
       '.jsx',
       '.ts',
@@ -75,15 +75,19 @@ module.exports = {
       '@components': path.resolve(__dirname, './src/components'),
       '@ui': path.resolve(__dirname, './src/components/ui'),
       '@ui-pages': path.resolve(__dirname, './src/components/ui/pages'),
-      '@utils-types': path.resolve(__dirname, './src/utils/types'),
+      '@utils-types': path.resolve(__dirname, './src/utils/types.ts'),
       '@api': path.resolve(__dirname, './src/utils/burger-api.ts'),
       '@slices': path.resolve(__dirname, './src/services/slices'),
-      '@selectors': path.resolve(__dirname, './src/services/selectors')
+      '@selectors': path.resolve(__dirname, './src/services/selectors'),
+      '@store': path.resolve(__dirname, './src/services/store.ts'),
+      '@constants': path.resolve(__dirname, './src/services/constants.ts'),
+      '@thunk': path.resolve(__dirname, './src/services/thunk')
     }
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   devServer: {
     static: path.join(__dirname, './dist'),

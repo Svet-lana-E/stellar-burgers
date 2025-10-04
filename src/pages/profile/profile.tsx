@@ -1,16 +1,20 @@
+import { useSelector } from '@store';
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
+import { userSelectors } from '../../services/slices/user';
 
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
+  const userData = useSelector(userSelectors.selectUser);
+
   const user = {
-    name: '',
-    email: ''
+    name: userData?.name,
+    email: userData?.email
   };
 
   const [formValue, setFormValue] = useState({
-    name: user.name,
-    email: user.email,
+    name: user.name || '',
+    email: user.email || '',
     password: ''
   });
 
@@ -20,7 +24,7 @@ export const Profile: FC = () => {
       name: user?.name || '',
       email: user?.email || ''
     }));
-  }, [user]);
+  }, [user]); // изменить на [user] когда const user будет браться из store (чтобы не было бесконечной загрузки)
 
   const isFormChanged =
     formValue.name !== user?.name ||
@@ -33,11 +37,13 @@ export const Profile: FC = () => {
 
   const handleCancel = (e: SyntheticEvent) => {
     e.preventDefault();
-    setFormValue({
-      name: user.name,
-      email: user.email,
-      password: ''
-    });
+    if (user.name && user.email) {
+      setFormValue({
+        name: user.name,
+        email: user.email,
+        password: ''
+      });
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +62,4 @@ export const Profile: FC = () => {
       handleInputChange={handleInputChange}
     />
   );
-
-  return null;
 };

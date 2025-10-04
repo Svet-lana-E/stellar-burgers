@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TIngredient } from '@utils-types';
-import { INGREDIENTS_SLICE_NAME, RequestStatus } from '../constants';
+import { INGREDIENTS_SLICE_NAME, RequestStatus } from '@constants';
 import { fetchIngredients } from '../thunk/ingredientsThunk';
 
 interface IngredientsState {
@@ -28,10 +28,8 @@ const IngredientsSlice = createSlice({
         state.requestStatus = RequestStatus.LOADING;
       })
       .addCase(fetchIngredients.fulfilled, (state, action) => {
-        console.dir(action.payload);
         state.ingredients = action.payload;
         state.requestStatus = RequestStatus.SUCCESS;
-        console.dir(state.ingredients);
       });
   },
 

@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ORDERS_SLICE_NAME, RequestStatus } from '../constants';
-import { TOrderResponse } from '@api';
+import { ORDERS_SLICE_NAME, RequestStatus } from '@constants';
 import { TOrder } from '@utils-types';
+import { placeNewOrder } from '../thunk/orderThunk';
 
-interface OrdersStatus {
+interface OrdersState {
   orders: TOrder[];
   ordersStatus: RequestStatus;
 }
 
-const initialState: OrdersStatus = {
+const initialState: OrdersState = {
   orders: [],
   ordersStatus: RequestStatus.IDLE
 };
@@ -16,9 +16,19 @@ const initialState: OrdersStatus = {
 const OrdersSlice = createSlice({
   name: ORDERS_SLICE_NAME,
   initialState,
-  reducers: {},
-  selectors: {}
+  reducers: {
+    addOrder: (state, action: { payload: TOrder }) => {
+      state.orders.push(action.payload);
+    }
+    // removeOrder: (state, action: { payload: TOrder }) => {
+    //   state.orders.filter(order => order.status !== 'готов')}
+  },
+  selectors: {
+    selectOrders: (state) => state.orders,
+    selectOrdersStatus: (state) => state.ordersStatus
+  }
 });
 
+export const ordersActions = { ...OrdersSlice.actions, placeNewOrder };
 export const ordersSelectors = OrdersSlice.selectors;
 export default OrdersSlice;

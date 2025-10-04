@@ -1,4 +1,4 @@
-import { useSelector } from '../../services/store';
+import { useSelector } from '@store';
 
 import styles from './constructor-page.module.css';
 
@@ -7,7 +7,7 @@ import { BurgerConstructor } from '../../components';
 import { Preloader } from '../../components/ui';
 import { FC } from 'react';
 import { ingredientsSelectors } from '../../services/slices/ingredients';
-import { RequestStatus } from '../../services/constants';
+import { RequestStatus } from '@constants';
 
 export const ConstructorPage: FC = () => {
   /** TODO: взять переменную из стора */
