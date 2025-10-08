@@ -15,7 +15,6 @@ export const placeNewOrder = createAsyncThunk(
   async (ingredientsId: string[], { dispatch }): Promise<TOrder> => {
     try {
       const res: TOrder = (await orderBurgerApi(ingredientsId)).order;
-      console.dir(res);
       return res;
     } catch (error) {
       console.warn('NEWORDER ERROR', error);

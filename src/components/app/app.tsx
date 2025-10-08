@@ -48,15 +48,14 @@ const App = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchIngredients());
-    dispatch(fetchFeeds());
     dispatch(fetchUser())
       .unwrap()
       .catch(() => {})
       .finally(() => setUserCheck());
+    dispatch(fetchIngredients());
+    dispatch(fetchFeeds());
   }, [dispatch]);
 
-  // }
   return (
     <div className={styles.app}>
       <AppHeader />

@@ -20,7 +20,7 @@ export const Register: FC = () => {
       })
     )
       .unwrap()
-      .catch((err) => console.log('REGISTER ERROR', err));
+      .catch((err) => console.warn('REGISTER ERROR', err));
   };
 
   return (

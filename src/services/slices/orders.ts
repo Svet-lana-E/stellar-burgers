@@ -20,8 +20,6 @@ const OrdersSlice = createSlice({
     addOrder: (state, action: { payload: TOrder }) => {
       state.orders.push(action.payload);
     }
-    // removeOrder: (state, action: { payload: TOrder }) => {
-    //   state.orders.filter(order => order.status !== 'готов')}
   },
   selectors: {
     selectOrders: (state) => state.orders,

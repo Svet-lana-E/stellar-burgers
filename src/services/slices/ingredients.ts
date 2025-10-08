@@ -17,10 +17,7 @@ const IngredientsSlice = createSlice({
   name: INGREDIENTS_SLICE_NAME,
   initialState,
 
-  reducers: {
-    // setIngredients: (state, action: PayloadAction<TIngredient[] |>) =>
-    //   (state.ingredients = action.payload)
-  },
+  reducers: {},
 
   extraReducers(builder) {
     builder

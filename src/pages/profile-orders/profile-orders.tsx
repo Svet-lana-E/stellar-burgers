@@ -7,7 +7,6 @@ import { ordersSelectors } from '../../services/slices/orders';
 export const ProfileOrders: FC = () => {
   /** TODO: взять переменную из стора */
   const orders: TOrder[] = useSelector(ordersSelectors.selectOrders);
-  console.dir(orders);
 
   return <ProfileOrdersUI orders={orders} />;
 };

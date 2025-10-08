@@ -67,15 +67,10 @@ const BurgerConstructorSlice = createSlice({
         ingredients[i + 1] = temp;
       }
     }
-    // handleOrderRequest: (state) => {
-    //   state.orderRequest = true;
-    // }
   },
-  //extraReducers(builder) {},
   selectors: {
     selectBurgerBun: (state) => state.bun,
     selectBurgerIngredients: (state) => state.ingredients
-    //selectNewOrderRequestStatus: (state) => (state.orderRequest = true)
   }
 });
 

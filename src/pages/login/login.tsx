@@ -6,23 +6,30 @@ import { userActions } from '../../services/slices/user';
 export const Login: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorText, setErrorText] = useState('');
   const dispatch = useDispatch();
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    setErrorText('');
     if (email && password) {
       dispatch(
         userActions.loginUser({
           email,
           password
         })
-      ).catch((error) => console.log('LOGIN ERROR', error));
+      ).catch((error) => {
+        setErrorText(error);
+        console.warn('LOGIN ERROR', error);
+      });
+    } else if (!email || !password || !(email && password)) {
+      setErrorText('Необходимо заполнить данные');
     }
   };
 
   return (
     <LoginUI
-      errorText=''
+      errorText={errorText}
       email={email}
       setEmail={setEmail}
       password={password}

@@ -17,14 +17,10 @@ export const OrderInfo: FC = () => {
   const ingredients: TIngredient[] = useSelector(
     ingredientsSelectors.selectIngredients
   ).filter((item) => orderData?.ingredients.includes(item._id));
-  console.dir(orderData);
-  console.dir(ingredients);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;
-    console.dir(orderData);
-    console.dir(ingredients);
     const date = new Date(orderData.createdAt);
 
     type TIngredientsWithCount = {

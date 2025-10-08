@@ -6,7 +6,7 @@ import { userActions, userSelectors } from '../../services/slices/user';
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
   const userData = useSelector(userSelectors.selectUser);
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const user = {
     name: userData?.name,
@@ -25,7 +25,7 @@ export const Profile: FC = () => {
       name: user?.name || '',
       email: user?.email || ''
     }));
-  }, [user]); // изменить на [user] когда const user будет браться из store (чтобы не было бесконечной загрузки)
+  }, []); // изменить на [user] когда const user будет браться из store (чтобы не было бесконечной загрузки)
 
   const isFormChanged =
     formValue.name !== user?.name ||
@@ -34,9 +34,18 @@ export const Profile: FC = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    // dispatch(
-    //   userActions.updateUser(
-    // );
+    dispatch(userActions.updateUser(formValue))
+      .unwrap()
+      .then((data) => {
+        if (data && data.email && data.name) {
+          setFormValue({
+            name: data.name,
+            email: data.email,
+            password: ''
+          });
+        }
+      })
+      .catch((err) => console.warn(err));
   };
 
   const handleCancel = (e: SyntheticEvent) => {
