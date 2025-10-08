@@ -7,38 +7,47 @@ import { placeNewOrder } from '../thunk/orderThunk';
 interface OrderState {
   info: TOrder | null;
   orderStatus: RequestStatus;
-  newOrderStatusRequest: boolean;
+  newOrderRequestStatus: boolean;
 }
 
 const initialState: OrderState = {
   info: null,
   orderStatus: RequestStatus.IDLE,
-  newOrderStatusRequest: false
+  newOrderRequestStatus: false
 };
 
 const OrderSlice = createSlice({
   name: ORDER_SLICE_NAME,
   initialState,
   reducers: {
-    addIngredient: (state, action) => {
-      state.info?.ingredients.push(action.payload);
+    deleteOrderInfo: (state) => {
+      state.info = null;
+    },
+    setNewOrderRequest: (state, action: { payload: boolean }) => {
+      state.newOrderRequestStatus = action.payload;
     }
   },
   extraReducers(builder) {
     builder
       .addCase(placeNewOrder.pending, (state) => {
         state.orderStatus = RequestStatus.LOADING;
+        state.newOrderRequestStatus = true;
       })
-      .addCase(placeNewOrder.fulfilled, (state) => {
+      .addCase(placeNewOrder.fulfilled, (state, action) => {
         state.orderStatus = RequestStatus.SUCCESS;
+        state.info = action.payload;
       })
       .addCase(placeNewOrder.rejected, (state) => {
         state.orderStatus = RequestStatus.FAILED;
       });
   },
-  selectors: {}
+  selectors: {
+    selectNewOrderRequest: (state) => state.newOrderRequestStatus,
+    selectNewOrder: (state) => state.info
+  }
 });
 
-export const { addIngredient } = OrderSlice.actions;
+export const orderActions = { ...OrderSlice.actions, placeNewOrder };
 export const orderSelectors = OrderSlice.selectors;
+
 export default OrderSlice;

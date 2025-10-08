@@ -6,13 +6,11 @@ import { v4 as uuidv4 } from 'uuid';
 interface BurgerConstructorState {
   bun: TConstructorIngredient | null;
   ingredients: TConstructorIngredient[];
-  //orderRequest: boolean;
 }
 
 const initialState: BurgerConstructorState = {
   bun: null,
   ingredients: []
-  //orderRequest: false
 };
 
 const BurgerConstructorSlice = createSlice({
@@ -42,6 +40,10 @@ const BurgerConstructorSlice = createSlice({
       state.ingredients = state.ingredients.filter(
         (item) => item.id !== action.payload.id
       );
+    },
+    deleteBurger: (state) => {
+      state.bun = null;
+      state.ingredients = [];
     },
     handleMoveUp: (state, action: { payload: TConstructorIngredient }) => {
       const ingredients = state.ingredients;

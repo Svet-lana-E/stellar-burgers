@@ -34,7 +34,6 @@ import { userActions } from '../../services/slices/user';
 import { useEffect } from 'react';
 
 const App = () => {
-  //const searchQuery = useSelector
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { fetchUser, loginUser, registerUser, setUserCheck } = userActions;
@@ -44,23 +43,11 @@ const App = () => {
   const feedMatch = useMatch('/feed/:number')?.params.number;
   const orderNumber = profileMatch || feedMatch;
 
-  // const handleRequest = () => {
-  //fetchCards(searchQuery);
-  // }
-  // const ingredients = useSelector(ingredientsSelectors.selectIngredients);
-  // const isLoading = useSelector(ingredientsSelectors.selectIngredientsStatus);
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    //handleRequest();
-  };
-
   const onCloseModal = () => {
     navigate(-1);
   };
 
   useEffect(() => {
-    //handleRequest();
     dispatch(fetchIngredients());
     dispatch(fetchFeeds());
     dispatch(fetchUser())
@@ -93,11 +80,7 @@ const App = () => {
           path='/login'
           element={
             <ProtectedRoute isPublic>
-              <Login
-              // onLogin={(dataUser) => {
-              //   loginUser(dataUser);
-              // }}
-              />
+              <Login />
             </ProtectedRoute>
           }
         />
@@ -112,7 +95,7 @@ const App = () => {
         <Route
           path='/forgot-password'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute isPublic>
               <ForgotPassword />
             </ProtectedRoute>
           }
@@ -120,7 +103,7 @@ const App = () => {
         <Route
           path='/reset-password'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute isPublic>
               <ResetPassword />
             </ProtectedRoute>
           }

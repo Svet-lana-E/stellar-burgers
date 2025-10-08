@@ -1,11 +1,12 @@
-import { useSelector } from '@store';
+import { useDispatch, useSelector } from '@store';
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-import { userSelectors } from '../../services/slices/user';
+import { userActions, userSelectors } from '../../services/slices/user';
 
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
   const userData = useSelector(userSelectors.selectUser);
+  //const dispatch = useDispatch();
 
   const user = {
     name: userData?.name,
@@ -33,6 +34,9 @@ export const Profile: FC = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    // dispatch(
+    //   userActions.updateUser(
+    // );
   };
 
   const handleCancel = (e: SyntheticEvent) => {

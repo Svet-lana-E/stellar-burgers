@@ -16,18 +16,27 @@ export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
   const ingredients: TIngredient[] = useSelector(
     ingredientsSelectors.selectIngredients
   );
-
+  console.dir(ingredients);
+  console.dir(order.ingredients);
   const orderInfo = useMemo(() => {
-    if (!ingredients.length) return null;
-
+    if (!ingredients.length) {
+      console.log('null');
+      return null;
+    }
     const ingredientsInfo = order.ingredients.reduce(
-      (acc: TIngredient[], item: string) => {
-        const ingredient = ingredients.find((ing) => ing._id === item);
-        if (ingredient) return [...acc, ingredient];
+      (acc: TIngredient[], ingredient: string) => {
+        console.dir(acc);
+        console.dir(ingredient);
+        const item = ingredients.find((ing) => ing._id === ingredient);
+        console.dir(ingredient);
+        if (item) {
+          return [...acc, item];
+        }
         return acc;
       },
       []
     );
+    console.dir(ingredientsInfo);
 
     const total = ingredientsInfo.reduce((acc, item) => acc + item.price, 0);
 

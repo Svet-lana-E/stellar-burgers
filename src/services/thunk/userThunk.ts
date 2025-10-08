@@ -67,9 +67,7 @@ export const updateUser = createAsyncThunk(
   `${USER_SLICE_NAME}/updateUser`,
   async (user: Partial<TRegisterData>, { dispatch }) => {
     try {
-      const data = await updateUserApi(user).then((result) => {
-        dispatch(userActions.setUserData(result.user));
-      });
+      return await updateUserApi(user).then((res) => res.user);
     } catch (error) {
       console.warn('USERUPDATE ERROR', error);
     }
