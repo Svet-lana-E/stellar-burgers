@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { TConstructorIngredient, TOrder } from '@utils-types';
 import { BurgerConstructorUI } from '../../components/ui/burger-constructor';
 import {
@@ -7,9 +7,6 @@ import {
 } from '../../services/slices/burgerConstructor';
 import { useDispatch, useSelector } from '@store';
 import { orderActions, orderSelectors } from '../../services/slices/order';
-import { ordersActions } from '../../services/slices/orders';
-import { TNewOrderResponse } from '@api';
-import { PayloadAction } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
 import { userSelectors } from '../../services/slices/user';
 import { feedActions } from '../../services/slices/feed';
@@ -54,7 +51,6 @@ export const BurgerConstructor: FC = () => {
           .then((data) => {
             dispatch(orderActions.setNewOrderRequest(false));
             setOrderModalData(data);
-            dispatch(ordersActions.addOrder(data));
             dispatch(burgerConstructorActions.deleteBurger());
             dispatch(orderActions.deleteOrderInfo());
             dispatch(feedActions.fetchFeeds());

@@ -59,6 +59,7 @@ export const logoutUser = createAsyncThunk(
     const data = await logoutApi();
     deleteCookie('accessToken');
     localStorage.removeItem('refreshToken');
+    localStorage.removeItem('resetPassword');
     return data;
   }
 );

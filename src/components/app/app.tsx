@@ -26,17 +26,20 @@ import {
   useNavigate
 } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route';
-import { useDispatch, useSelector } from '@store';
-import { fetchIngredients } from '../../services/thunk/ingredientsThunk';
-import { ingredientsSelectors } from '../../services/slices/ingredients';
-import { fetchFeeds } from '../../services/thunk/feedThunk';
+import { useDispatch } from '@store';
+import { feedActions } from '../../services/slices/feed';
+import { ingredientsActions } from '../../services/slices/ingredients';
 import { userActions } from '../../services/slices/user';
+import { ordersActions } from '../../services/slices/orders';
 import { useEffect } from 'react';
 
 const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { fetchUser, loginUser, registerUser, setUserCheck } = userActions;
+  const { fetchUser, setUserCheck } = userActions;
+  const { getOrders } = ordersActions;
+  const { fetchFeeds } = feedActions;
+  const { fetchIngredients } = ingredientsActions;
   const location: Location<{ background: Location }> = useLocation();
   const background = location.state?.background;
   const profileMatch = useMatch('/profile/orders/:number')?.params.number;
@@ -54,6 +57,7 @@ const App = () => {
       .finally(() => setUserCheck());
     dispatch(fetchIngredients());
     dispatch(fetchFeeds());
+    dispatch(getOrders());
   }, [dispatch]);
 
   return (

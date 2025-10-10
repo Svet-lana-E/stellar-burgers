@@ -36,6 +36,10 @@ const IngredientsSlice = createSlice({
   }
 });
 
+export const ingredientsActions = {
+  ...IngredientsSlice.actions,
+  fetchIngredients
+};
 export const ingredientsSelectors = IngredientsSlice.selectors;
 
 export default IngredientsSlice;
