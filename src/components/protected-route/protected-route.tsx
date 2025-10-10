@@ -21,9 +21,11 @@ export const ProtectedRoute = ({
   }
 
   if (isPublic && user) {
-    const from = location.state?.from || { pathname: '/' };
+    const from = location.state?.from
+      ? { pathname: '/profile' }
+      : { pathname: '/' };
     return (
-      <Navigate to={from} state={{ background: from?.state?.background }} />
+      <Navigate to={from.pathname} state={{ background: from.pathname }} />
     );
   }
 
