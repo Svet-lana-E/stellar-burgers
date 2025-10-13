@@ -30,14 +30,12 @@ import { useDispatch } from '@store';
 import { feedActions } from '../../services/slices/feed';
 import { ingredientsActions } from '../../services/slices/ingredients';
 import { userActions } from '../../services/slices/user';
-import { ordersActions } from '../../services/slices/orders';
 import { useEffect } from 'react';
 
 const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { fetchUser, setUserCheck } = userActions;
-  const { getOrders } = ordersActions;
   const { fetchFeeds } = feedActions;
   const { fetchIngredients } = ingredientsActions;
   const location: Location<{ background: Location }> = useLocation();
@@ -57,7 +55,6 @@ const App = () => {
       .finally(() => setUserCheck());
     dispatch(fetchIngredients());
     dispatch(fetchFeeds());
-    dispatch(getOrders());
   }, [dispatch]);
 
   return (

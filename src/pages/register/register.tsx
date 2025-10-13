@@ -8,10 +8,21 @@ export const Register: FC = () => {
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setErrorText] = useState('');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userName && email && password) {
+      setErrorText('');
+    }
+  }, [userName, email, password]);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    if (!userName || !email || !password) {
+      setErrorText(error);
+      return;
+    }
     dispatch(
       userActions.registerUser({
         email: email,
@@ -20,12 +31,15 @@ export const Register: FC = () => {
       })
     )
       .unwrap()
-      .catch((err) => console.warn('REGISTER ERROR', err));
+      .catch((err) => {
+        setErrorText(err.message);
+        console.warn('REGISTER ERROR', err.message);
+      });
   };
 
   return (
     <RegisterUI
-      errorText=''
+      errorText={error}
       email={email}
       userName={userName}
       password={password}
