@@ -27,7 +27,6 @@ import {
 } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route';
 import { useDispatch } from '@store';
-import { feedActions } from '../../services/slices/feed';
 import { ingredientsActions } from '../../services/slices/ingredients';
 import { userActions } from '../../services/slices/user';
 import { useEffect } from 'react';
@@ -36,7 +35,6 @@ const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { fetchUser, setUserCheck } = userActions;
-  const { fetchFeeds } = feedActions;
   const { fetchIngredients } = ingredientsActions;
   const location: Location<{ background: Location }> = useLocation();
   const background = location.state?.background;
@@ -54,7 +52,6 @@ const App = () => {
       .catch(() => {})
       .finally(() => setUserCheck());
     dispatch(fetchIngredients());
-    dispatch(fetchFeeds());
   }, [dispatch]);
 
   return (

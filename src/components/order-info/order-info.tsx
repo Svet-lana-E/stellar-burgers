@@ -1,27 +1,34 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { Preloader } from '../../components/ui/preloader';
 import { OrderInfoUI } from '../../components/ui/order-info';
-import { TIngredient } from '@utils-types';
+import { TIngredient, TOrder } from '@utils-types';
 import { useParams } from 'react-router-dom';
-import { useSelector } from '@store';
-import { feedSelectors } from '../../services/slices/feed';
+import { useDispatch, useSelector } from '@store';
+import { feedActions, feedSelectors } from '../../services/slices/feed';
 import { ingredientsSelectors } from '../../services/slices/ingredients';
-import { ordersSelectors } from '../../services/slices/orders';
+import { ordersSelectors, ordersActions } from '../../services/slices/orders';
 
 export const OrderInfo: FC = () => {
   /** TODO: взять переменные orderData и ingredients из стора */
   const { number } = useParams();
-  const orderData =
-    useSelector(feedSelectors.selectOrdersList).find(
-      (element) => element.number.toString() === number
-    ) ||
-    useSelector(ordersSelectors.selectOrders).find(
-      (element) => element.number.toString() === number
-    );
+  const dispatch = useDispatch();
+  const feedData = useSelector(feedSelectors.selectOrdersList);
+  const ordersData = useSelector(ordersSelectors.selectOrders);
+  const ingredientsData = useSelector(ingredientsSelectors.selectIngredients);
 
-  const ingredients: TIngredient[] = useSelector(
-    ingredientsSelectors.selectIngredients
-  ).filter((item) => orderData?.ingredients.includes(item._id));
+  useEffect(() => {
+    dispatch(ordersActions.getOrders());
+  }, [dispatch]);
+
+  const orderData =
+    feedData.find((element) => element.number.toString() === number) ||
+    ordersData.find((element) => element.number.toString() === number);
+
+  const ingredients: TIngredient[] = orderData
+    ? ingredientsData.filter((item) =>
+        orderData?.ingredients.includes(item._id)
+      )
+    : [];
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
