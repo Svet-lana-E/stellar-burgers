@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { FEED_SLICE_NAME, RequestStatus } from '@constants';
-import { TFeedsResponse } from '@api';
-import { fetchFeeds } from '../thunk/feedThunk';
+import { FEED_SLICE_NAME, RequestStatus } from '../../constants';
+import { TFeedsResponse } from '../../../utils/burger-api';
+import { fetchFeeds } from '../../thunk/feedThunk';
 
 interface FeedState {
   ordersData: Omit<TFeedsResponse, 'success'>;

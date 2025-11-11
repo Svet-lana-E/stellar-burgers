@@ -1,5 +1,5 @@
-import { getOrdersApi } from '@api';
-import { ORDERS_SLICE_NAME } from '@constants';
+import { getOrdersApi } from '../../utils/burger-api';
+import { ORDERS_SLICE_NAME } from '../constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const getOrders = createAsyncThunk(

@@ -4,9 +4,15 @@ import { OrderInfoUI } from '../../components/ui/order-info';
 import { TIngredient, TOrder } from '@utils-types';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from '@store';
-import { feedActions, feedSelectors } from '../../services/slices/feed';
-import { ingredientsSelectors } from '../../services/slices/ingredients';
-import { ordersSelectors, ordersActions } from '../../services/slices/orders';
+import {
+  feedActions,
+  feedSelectors
+} from '../../services/slices/feed-slice/feed';
+import { ingredientsSelectors } from '../../services/slices/ingredients-slice/ingredients';
+import {
+  ordersSelectors,
+  ordersActions
+} from '../../services/slices/orders-slice/orders';
 
 export const OrderInfo: FC = () => {
   /** TODO: взять переменные orderData и ingredients из стора */

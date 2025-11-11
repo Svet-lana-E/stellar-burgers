@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ORDER_SLICE_NAME, RequestStatus } from '@constants';
-import { TNewOrderResponse } from '@api';
+import { ORDER_SLICE_NAME, RequestStatus } from '../../constants';
 import { TOrder } from '@utils-types';
-import { placeNewOrder } from '../thunk/orderThunk';
+import { placeNewOrder } from '../../thunk/orderThunk';
 
 interface OrderState {
   info: TOrder | null;

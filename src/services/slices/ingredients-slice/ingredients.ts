@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TIngredient } from '@utils-types';
-import { INGREDIENTS_SLICE_NAME, RequestStatus } from '@constants';
-import { fetchIngredients } from '../thunk/ingredientsThunk';
+import { INGREDIENTS_SLICE_NAME, RequestStatus } from '../../constants';
+import { fetchIngredients } from '../../thunk/ingredientsThunk';
 
 interface IngredientsState {
   ingredients: TIngredient[];

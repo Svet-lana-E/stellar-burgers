@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { BURGER_CONSTRUCTOR_SLICE_NAME } from '@constants';
+import { BURGER_CONSTRUCTOR_SLICE_NAME } from '../../constants';
 import { TConstructorIngredient, TIngredient } from '@utils-types';
 import { v4 as uuidv4 } from 'uuid';
 

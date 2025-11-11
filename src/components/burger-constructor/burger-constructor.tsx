@@ -1,15 +1,18 @@
-import { FC, useMemo, useState } from 'react';
+import { FC, SetStateAction, useMemo, useState } from 'react';
 import { TConstructorIngredient, TOrder } from '@utils-types';
 import { BurgerConstructorUI } from '../../components/ui/burger-constructor';
 import {
   burgerConstructorActions,
   burgerConstructorSelectors
-} from '../../services/slices/burgerConstructor';
+} from '../../services/slices/burgerConstructor-slice/burgerConstructor';
 import { useDispatch, useSelector } from '@store';
-import { orderActions, orderSelectors } from '../../services/slices/order';
+import {
+  orderActions,
+  orderSelectors
+} from '../../services/slices/order-slice/order';
 import { useNavigate } from 'react-router-dom';
-import { userSelectors } from '../../services/slices/user';
-import { feedActions } from '../../services/slices/feed';
+import { userSelectors } from '../../services/slices/user-slice/user';
+import { feedActions } from '../../services/slices/feed-slice/feed';
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
@@ -48,7 +51,7 @@ export const BurgerConstructor: FC = () => {
           )
         )
           .unwrap()
-          .then((data) => {
+          .then((data: SetStateAction<TOrder | null>) => {
             dispatch(orderActions.setNewOrderRequest(false));
             setOrderModalData(data);
             dispatch(burgerConstructorActions.deleteBurger());
