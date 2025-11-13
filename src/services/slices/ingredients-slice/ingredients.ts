@@ -3,12 +3,12 @@ import { TIngredient } from '@utils-types';
 import { INGREDIENTS_SLICE_NAME, RequestStatus } from '../../constants';
 import { fetchIngredients } from '../../thunk/ingredientsThunk';
 
-interface IngredientsState {
+export interface IngredientsState {
   ingredients: TIngredient[];
   requestStatus: RequestStatus;
 }
 
-const initialState: IngredientsState = {
+export const initialState: IngredientsState = {
   ingredients: [],
   requestStatus: RequestStatus.IDLE
 };
@@ -41,5 +41,6 @@ export const ingredientsActions = {
   fetchIngredients
 };
 export const ingredientsSelectors = IngredientsSlice.selectors;
+export const ingredientsReducer = IngredientsSlice.reducer;
 
 export default IngredientsSlice;

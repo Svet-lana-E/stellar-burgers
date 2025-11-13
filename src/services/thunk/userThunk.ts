@@ -13,7 +13,6 @@ import { USER_SLICE_NAME } from '../constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
 import { userActions } from '../slices/user-slice/user';
-import { useDispatch } from '@store';
 
 export const fetchUser = createAsyncThunk(
   `${USER_SLICE_NAME}/fetchUser`,

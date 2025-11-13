@@ -13,13 +13,13 @@ import {
   isActionRejected
 } from '../../../utils/addMatcherFunctions';
 
-interface UserState {
+export interface UserState {
   userChecked: boolean;
   userData: TUser | null;
   requestStatus: RequestStatus;
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
   userChecked: false,
   userData: null,
   requestStatus: RequestStatus.IDLE
@@ -90,4 +90,6 @@ export const userActions = {
 };
 
 export const userSelectors = UserSlice.selectors;
+export const userReducer = UserSlice.reducer;
+
 export default UserSlice;

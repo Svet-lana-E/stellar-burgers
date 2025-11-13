@@ -3,12 +3,12 @@ import { BURGER_CONSTRUCTOR_SLICE_NAME } from '../../constants';
 import { TConstructorIngredient, TIngredient } from '@utils-types';
 import { v4 as uuidv4 } from 'uuid';
 
-interface BurgerConstructorState {
+export interface BurgerConstructorState {
   bun: TConstructorIngredient | null;
   ingredients: TConstructorIngredient[];
 }
 
-const initialState: BurgerConstructorState = {
+export const initialState: BurgerConstructorState = {
   bun: null,
   ingredients: []
 };
@@ -75,5 +75,6 @@ const BurgerConstructorSlice = createSlice({
 
 export const burgerConstructorActions = BurgerConstructorSlice.actions;
 export const burgerConstructorSelectors = BurgerConstructorSlice.selectors;
+export const burgerConstructorReducer = BurgerConstructorSlice.reducer;
 
 export default BurgerConstructorSlice;
