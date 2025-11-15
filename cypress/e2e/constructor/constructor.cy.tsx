@@ -6,7 +6,7 @@ const extraIngredientId = '643d69a5c3f7b9001cfa0943';
 
 describe('проверяем доступность приложения', () => {
   it('сервис должен быть доступен по адресу localhost:4000', function () {
-    cy.visit('http://localhost:4000/');
+    cy.visit('/');
   });
 });
 
@@ -240,5 +240,10 @@ describe('проверяем оформление заказа при налич
       .should('contain', 'Выберите начинку')
       .and('have.length', 1);
     cy.get('@burgerPrice').should('contain', 0);
+  });
+
+  afterEach(() => {
+    cy.clearCookie('accessToken');
+    cy.clearLocalStorage();
   });
 });

@@ -1,11 +1,18 @@
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "noEmit": true,
-    "types": ["cypress"]
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "node"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
   },
   "include": [
-    "../node_modules/cypress",
-    "./**/*.ts"
-, "e2e/constructor/constructor.cy.tsx"  ]
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
