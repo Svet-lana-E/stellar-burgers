@@ -6,8 +6,8 @@ import { BurgerIngredients } from '../../components';
 import { BurgerConstructor } from '../../components';
 import { Preloader } from '../../components/ui';
 import { FC } from 'react';
-import { ingredientsSelectors } from '../../services/slices/ingredients';
-import { RequestStatus } from '@constants';
+import { ingredientsSelectors } from '../../services/slices/ingredients-slice/ingredients';
+import { RequestStatus } from '../../services/constants';
 
 export const ConstructorPage: FC = () => {
   /** TODO: взять переменную из стора */

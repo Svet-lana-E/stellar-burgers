@@ -1,4 +1,4 @@
-import { RequestStatus, USER_SLICE_NAME } from '@constants';
+import { RequestStatus, USER_SLICE_NAME } from '../../constants';
 import { createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import {
@@ -7,19 +7,19 @@ import {
   logoutUser,
   registerUser,
   updateUser
-} from '../thunk/userThunk';
+} from '../../thunk/userThunk';
 import {
   isActionPending,
   isActionRejected
-} from '../../utils/addMatcherFunctions';
+} from '../../../utils/addMatcherFunctions';
 
-interface UserState {
+export interface UserState {
   userChecked: boolean;
   userData: TUser | null;
   requestStatus: RequestStatus;
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
   userChecked: false,
   userData: null,
   requestStatus: RequestStatus.IDLE
@@ -90,4 +90,6 @@ export const userActions = {
 };
 
 export const userSelectors = UserSlice.selectors;
+export const userReducer = UserSlice.reducer;
+
 export default UserSlice;

@@ -1,0 +1,9 @@
+{
+    "success": true,
+    "refreshToken": "ead41463f2598fNKY6n83BJlHj96e97e05d9652hYtl9",
+    "accessToken": "Bearer eyJhbGciOiJIvn56NK5hjNJkI6IkpXVCJ9",
+    "user": {
+        "email":"user@email.com",
+        "name":"User"
+    }
+}

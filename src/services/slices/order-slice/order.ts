@@ -1,16 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ORDER_SLICE_NAME, RequestStatus } from '@constants';
-import { TNewOrderResponse } from '@api';
+import { ORDER_SLICE_NAME, RequestStatus } from '../../constants';
 import { TOrder } from '@utils-types';
-import { placeNewOrder } from '../thunk/orderThunk';
+import { placeNewOrder } from '../../thunk/orderThunk';
 
-interface OrderState {
+export interface OrderState {
   info: TOrder | null;
   orderStatus: RequestStatus;
   newOrderRequestStatus: boolean;
 }
 
-const initialState: OrderState = {
+export const initialState: OrderState = {
   info: null,
   orderStatus: RequestStatus.IDLE,
   newOrderRequestStatus: false
@@ -49,5 +48,6 @@ const OrderSlice = createSlice({
 
 export const orderActions = { ...OrderSlice.actions, placeNewOrder };
 export const orderSelectors = OrderSlice.selectors;
+export const orderReducer = OrderSlice.reducer;
 
 export default OrderSlice;

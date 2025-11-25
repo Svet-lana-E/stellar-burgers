@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -31,5 +33,14 @@
       "@thunk": ["src/services/thunk"],
     }
   },
-  "include": ["src"]
+  "include": ["src/**/*"],
+  "exclude": [
+    "cypress",
+    "**/*.test.ts",
+    "**/*.test.tsx", 
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "node_modules",
+    "**/dist/**"
+  ]
 }

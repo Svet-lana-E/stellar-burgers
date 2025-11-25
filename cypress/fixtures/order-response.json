@@ -1,0 +1,63 @@
+{
+  "success": true,
+  "name": "Био-марсианский флюоресцентный бургер",
+  "order": {
+    "ingredients": [
+      {
+          "_id": "643d69a5c3f7b9001cfa093d",
+          "name": "Флюоресцентная булка R2-D3",
+          "type": "bun",
+          "proteins": 44,
+          "fat": 26,
+          "carbohydrates": 85,
+          "calories": 643,
+          "price": 988,
+          "image": "https://code.s3.yandex.net/react/code/bun-01.png",
+          "image_mobile": "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+          "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
+          "__v": 0
+      },
+      {
+          "_id": "643d69a5c3f7b9001cfa0941",
+          "name": "Биокотлета из марсианской Магнолии",
+          "type": "main",
+          "proteins": 420,
+          "fat": 142,
+          "carbohydrates": 242,
+          "calories": 4242,
+          "price": 424,
+          "image": "https://code.s3.yandex.net/react/code/meat-01.png",
+          "image_mobile": "https://code.s3.yandex.net/react/code/meat-01-mobile.png",
+          "image_large": "https://code.s3.yandex.net/react/code/meat-01-large.png",
+          "__v": 0
+      },
+      {
+          "_id": "643d69a5c3f7b9001cfa093d",
+          "name": "Флюоресцентная булка R2-D3",
+          "type": "bun",
+          "proteins": 44,
+          "fat": 26,
+          "carbohydrates": 85,
+          "calories": 643,
+          "price": 988,
+          "image": "https://code.s3.yandex.net/react/code/bun-01.png",
+          "image_mobile": "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+          "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
+          "__v": 0
+      }
+    ],
+    "_id": "690bbd14a64177001b31d261",
+    "owner": {
+      "name": "Sveta",
+      "email": "sy.eremeeva@gmail.com",
+      "createdAt": "2025-10-04T18:18:12.797Z",
+      "updatedAt": "2025-11-05T21:06:19.828Z"
+    },
+    "status": "done",
+    "name": "Био-марсианский флюоресцентный бургер",
+    "createdAt": "2025-11-05T21:09:40.665Z",
+    "updatedAt": "2025-11-05T21:09:40.875Z",
+    "number": 93391,
+    "price": 2400
+  }
+}

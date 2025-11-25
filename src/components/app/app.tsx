@@ -27,8 +27,8 @@ import {
 } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route';
 import { useDispatch } from '@store';
-import { ingredientsActions } from '../../services/slices/ingredients';
-import { userActions } from '../../services/slices/user';
+import { ingredientsActions } from '../../services/slices/ingredients-slice/ingredients';
+import { userActions } from '../../services/slices/user-slice/user';
 import { useEffect } from 'react';
 
 const App = () => {

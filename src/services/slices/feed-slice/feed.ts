@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { FEED_SLICE_NAME, RequestStatus } from '@constants';
-import { TFeedsResponse } from '@api';
-import { fetchFeeds } from '../thunk/feedThunk';
+import { FEED_SLICE_NAME, RequestStatus } from '../../constants';
+import { TFeedsResponse } from '../../../utils/burger-api';
+import { fetchFeeds } from '../../thunk/feedThunk';
 
-interface FeedState {
+export interface FeedState {
   ordersData: Omit<TFeedsResponse, 'success'>;
   requestStatus: RequestStatus;
 }
 
-const initialState: FeedState = {
+export const initialState: FeedState = {
   ordersData: {
     orders: [],
     total: 0,
@@ -43,4 +43,5 @@ const FeedSlice = createSlice({
 
 export const feedActions = { ...FeedSlice.actions, fetchFeeds };
 export const feedSelectors = FeedSlice.selectors;
+export const feedReducer = FeedSlice.reducer;
 export default FeedSlice;

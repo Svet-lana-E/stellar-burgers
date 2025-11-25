@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ORDERS_SLICE_NAME, RequestStatus } from '@constants';
+import { ORDERS_SLICE_NAME, RequestStatus } from '../../constants';
 import { TOrder } from '@utils-types';
-import { placeNewOrder } from '../thunk/orderThunk';
-import { getOrders } from '../thunk/ordersThunk';
+import { placeNewOrder } from '../../thunk/orderThunk';
+import { getOrders } from '../../thunk/ordersThunk';
 
-interface OrdersState {
+export interface OrdersState {
   orders: TOrder[];
   ordersStatus: RequestStatus;
 }
 
-const initialState: OrdersState = {
+export const initialState: OrdersState = {
   orders: [],
   ordersStatus: RequestStatus.IDLE
 };
@@ -49,4 +49,5 @@ export const ordersActions = {
   getOrders
 };
 export const ordersSelectors = OrdersSlice.selectors;
+export const ordersReducer = OrdersSlice.reducer;
 export default OrdersSlice;

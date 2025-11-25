@@ -8,12 +8,11 @@ import {
   TLoginData,
   TRegisterData,
   updateUserApi
-} from '@api';
-import { USER_SLICE_NAME } from '@constants';
+} from '../../utils/burger-api';
+import { USER_SLICE_NAME } from '../constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { deleteCookie, getCookie, setCookie } from '../../utils/cookie';
-import { userActions } from '../slices/user';
-import { useDispatch } from '@store';
+import { userActions } from '../slices/user-slice/user';
 
 export const fetchUser = createAsyncThunk(
   `${USER_SLICE_NAME}/fetchUser`,

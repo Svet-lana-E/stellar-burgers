@@ -38,3 +38,7 @@ export type TUser = {
 };
 
 export type TTabMode = 'bun' | 'sauce' | 'main';
+
+export type DataCyProps = {
+  'data-cy'?: string;
+};

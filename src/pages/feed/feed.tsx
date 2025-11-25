@@ -1,10 +1,8 @@
 import { Preloader } from '@ui';
 import { FeedUI } from '@ui-pages';
-import { TOrder } from '@utils-types';
 import { FC, useCallback, useEffect, useMemo } from 'react';
-import { feedSelectors } from '../../services/slices/feed';
+import { feedSelectors } from '../../services/slices/feed-slice/feed';
 import { fetchFeeds } from '../../services/thunk/feedThunk';
-import { getFeedsApi } from '@api';
 import { useDispatch, useSelector } from '@store';
 
 export const Feed: FC = () => {
