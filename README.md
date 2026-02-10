@@ -1,19 +1,23 @@
-# Проектная работа 11-го спринта
+**«Stellar Burgers»** — учебный проект в рамках курса фронтенд‑разработки Яндекс Практикума. Одностраничное веб‑приложение (SPA), имитирующее сервис заказа бургеров. \
+**Основной стек:** <img width="24" height="24" alt="image" src="https://github.com/user-attachments/assets/77827b46-13cd-44d3-9ba6-fcb3d2c4814e" />
+<img width="24" height="24" alt="image" src="https://github.com/user-attachments/assets/5e0adb2b-243b-4804-96b0-349a46b05f26" />
 
-[Макет](<https://www.figma.com/file/vIywAvqfkOIRWGOkfOnReY/React-Fullstack_-Проектные-задачи-(3-месяца)_external_link?type=design&node-id=0-1&mode=design>)
+Строгая типизация TypeScript, React с hooks, централизованное хранилище Redux, маршрутизация React Router, aсинхронные операции redux-thunk, взаимодействие с бэкендом через REST
 
-[Чеклист](https://www.notion.so/praktikum/0527c10b723d4873aa75686bad54b32e?pvs=4)
+Тестирование: Jest, Cyppress
 
-## Этапы работы:
-
-1. Разверните проект и ознакомьтесь с кодом. Все необходимые вам компоненты уже созданы и лежат в папке `src/components`
-
-2. Настройте роутинг.
-
-3. Напишите функционал запросов данных с сервера, используя `Redux` и глобальный `store`. Сами "ручки" уже прописаны и лежат в `utils/burger-api.ts`
-
-4. Настройте авторизацию и создайте защищённые роуты.
-
-## Важно:
-
+#### Важно:
 Для корректной работы запросов к серверу необходимо добавить переменную BURGER_API_URL в окружение. Сама ссылка находится в файле `.env.example`.
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+**"Star Burgers"** is a training project for the Yandex Practicum front-end development course. It's a single-page web application (SPA) that simulates a burger ordering service. \
+**Tools and languages:** <img width="24" height="24" alt="image" src="https://github.com/user-attachments/assets/77827b46-13cd-44d3-9ba6-fcb3d2c4814e" />
+<img width="24" height="24" alt="image" src="https://github.com/user-attachments/assets/5e0adb2b-243b-4804-96b0-349a46b05f26" />
+
+Strongly typed TypeScript, React with hooks, Redux store, React Router routing, asynchronous redux-thunk operations, and backend interaction via REST.
+
+Tests: Jest, Cyppress
+
+#### Important:
+For server requests to work correctly, you must add the BURGER_API_URL variable to the environment. The URL itself is located in the `.env.example` file.
